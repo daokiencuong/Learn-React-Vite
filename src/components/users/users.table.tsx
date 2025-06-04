@@ -1,6 +1,27 @@
+import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
 const UsersTable = () => {
+    const access_token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2tlbiBsb2dpbiIsImlzcyI6ImZyb20gc2VydmVyIiwiX2lkIjoiNjgzZmI3OTFjYzFlMDFlZTk0YTc2MjU2IiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJhZGRyZXNzIjoiVmlldE5hbSIsIm5hbWUiOiJBZG1pbiIsInR5cGUiOiJTWVNURU0iLCJyb2xlIjoiQURNSU4iLCJnZW5kZXIiOiJNQUxFIiwiYWdlIjo2OSwiaWF0IjoxNzQ5MDA2MjQ4LCJleHAiOjE4MzU0MDYyNDh9.pwS1dqvvItmZXZkRoEM7UaFdshdEHFIF_Nd_DcZgtq8";
+
+    const getData = async () => {
+        const res = await fetch("http://localhost:8000/api/v1/users/all", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${access_token}`,
+            },
+        });
+
+        const data = await res.json();
+
+        console.log(data);
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     return (
         <>
             <Table striped bordered hover>
